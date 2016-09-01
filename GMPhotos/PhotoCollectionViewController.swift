@@ -14,6 +14,35 @@ class PhotoCollectionViewController : UICollectionViewController
     }
 
 
+    // MARK: - Camera Related
+
+    @IBAction func handleCameraButtonTapped(sender: UIBarButtonItem) {
+        guard UIImagePickerController.isSourceTypeAvailable(.Camera) else {
+            let image = UIImage(named: "whistler.jpg")!
+            saveImage(image)
+            return
+        }
+
+        let controller = UIImagePickerController()
+        controller.sourceType = .Camera
+        controller.cameraCaptureMode = .Photo
+        controller.delegate = self
+
+        navigationController?.presentViewController(controller, animated: true, completion: nil)
+    }
+
+
+    func saveImage(image: UIImage) {
+
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let controller = storyboard.instantiateViewControllerWithIdentifier("SavePhotoViewController") as! SavePhotoViewController
+        controller.image = image
+
+        let navController = UINavigationController(rootViewController: controller)
+        presentViewController(navController, animated: true, completion: nil)
+    }
+
+
     // MARK: - Collection View Methods
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -57,4 +86,16 @@ class PhotoCollectionViewController : UICollectionViewController
         navigationController?.pushViewController(controller, animated: true)
     }
 
+}
+
+extension PhotoCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+{
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true) {
+            guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+                return
+            }
+            self.saveImage(PhotoHelper.correctPhotoRotation(image))
+        }
+    }
 }

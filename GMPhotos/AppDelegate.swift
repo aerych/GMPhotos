@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  GMPhotos
-//
-//  Created by aerych on 9/1/16.
-//  Copyright © 2016 Automattic. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

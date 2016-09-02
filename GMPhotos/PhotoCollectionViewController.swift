@@ -1,7 +1,29 @@
 import UIKit
+import CoreData
 
 class PhotoCollectionViewController : UICollectionViewController
 {
+
+    lazy var resultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest(entityName: "Photo")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        controller.delegate = self
+        do {
+            try controller.performFetch()
+        } catch let error as NSError {
+            assertionFailure("Failed to prerformFetch. \(error)")
+        }
+        return controller
+    }()
+
+    var managedObjectContext: NSManagedObjectContext {
+        get {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            return appDelegate.managedObjectContext
+        }
+    }
+
 
     // MARK: - LifeCycle Methods
 
@@ -46,12 +68,12 @@ class PhotoCollectionViewController : UICollectionViewController
     // MARK: - Collection View Methods
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return resultsController.sections?.count ?? 0
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return resultsController.fetchedObjects?.count ?? 0
     }
 
 
@@ -73,20 +95,29 @@ class PhotoCollectionViewController : UICollectionViewController
 
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCellReuseIdentifier", forIndexPath: indexPath) as! PhotoCell
-        cell.imageView.image = UIImage(named: "whistler.jpg")
+
+        if let photo = resultsController.objectAtIndexPath(indexPath) as? Photo {
+            cell.imageView.image = photo.image
+        }
+
         return cell
     }
 
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let photo = resultsController.objectAtIndexPath(indexPath) as? Photo else {
+            return
+        }
+
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let controller = storyboard.instantiateViewControllerWithIdentifier("PhotoViewController") as! PhotoViewController
+        controller.photo = photo
         navigationController?.pushViewController(controller, animated: true)
     }
 
 }
+
 
 extension PhotoCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -97,5 +128,13 @@ extension PhotoCollectionViewController: UIImagePickerControllerDelegate, UINavi
             }
             self.saveImage(PhotoHelper.correctPhotoRotation(image))
         }
+    }
+}
+
+
+extension PhotoCollectionViewController: NSFetchedResultsControllerDelegate
+{
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        collectionView?.reloadData()
     }
 }

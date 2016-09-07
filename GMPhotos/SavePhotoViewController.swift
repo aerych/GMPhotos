@@ -1,16 +1,28 @@
 import UIKit
 import CoreData
+import CoreLocation
 
 class SavePhotoViewController : UIViewController
 {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var textField: UITextField!
     var image: UIImage?
+    var coord: CLLocationCoordinate2D?
+
+    lazy var locationManager: CLLocationManager = {
+        let mgr = CLLocationManager()
+        mgr.delegate = self
+        mgr.requestWhenInUseAuthorization()
+        return mgr
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureView()
+
+        locationManager.requestLocation()
     }
 
 
@@ -51,6 +63,11 @@ class SavePhotoViewController : UIViewController
                         photo.caption = self.textField.text
                         photo.imageData = imageData
 
+                        if let coord = self.coord {
+                            photo.latitude = coord.latitude
+                            photo.longitude = coord.longitude
+                        }
+
                         appDelegate.saveContext()
                     }
                 }
@@ -61,5 +78,18 @@ class SavePhotoViewController : UIViewController
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
+    }
+}
+
+extension SavePhotoViewController : CLLocationManagerDelegate
+{
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            coord = location.coordinate
+        }
+    }
+
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("\(error)")
     }
 }

@@ -95,15 +95,23 @@
                                     <constraint firstAttribute="trailing" secondItem="R80-VP-liH" secondAttribute="trailing" constant="8" id="ViM-iM-hUx"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpl-0P-lSZ">
+                                <rect key="frame" x="562" y="80" width="22" height="22"/>
+                                <connections>
+                                    <action selector="handleMapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="grt-bl-gK1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="H4R-Fs-yRR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="2Vj-5b-aKt"/>
+                            <constraint firstAttribute="trailing" secondItem="Bpl-0P-lSZ" secondAttribute="trailing" constant="16" id="9Gi-B0-VeL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EaY-by-NYf" secondAttribute="bottom" constant="8" id="CCH-g6-tQ9"/>
                             <constraint firstAttribute="trailing" secondItem="EaY-by-NYf" secondAttribute="trailing" constant="8" id="MJB-40-3xp"/>
                             <constraint firstItem="H4R-Fs-yRR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Ogy-9F-tf4"/>
                             <constraint firstAttribute="trailing" secondItem="H4R-Fs-yRR" secondAttribute="trailing" constant="8" id="h5J-4E-ZCX"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H4R-Fs-yRR" secondAttribute="bottom" constant="8" id="q2J-xx-ul9"/>
+                            <constraint firstItem="Bpl-0P-lSZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="wg7-1q-3hh"/>
                             <constraint firstItem="EaY-by-NYf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="yIb-zU-rwC"/>
                         </constraints>
                     </view>
@@ -120,11 +128,45 @@
                         <outlet property="captionView" destination="EaY-by-NYf" id="EGC-w5-c7m"/>
                         <outlet property="imageView" destination="H4R-Fs-yRR" id="Ojq-El-2Pe"/>
                         <outlet property="label" destination="R80-VP-liH" id="AqY-uq-XvY"/>
+                        <outlet property="mapButton" destination="Bpl-0P-lSZ" id="RAj-9r-GJk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="761" y="190"/>
+        </scene>
+        <!--Location-->
+        <scene sceneID="nYW-tZ-fEu">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" title="Location" id="ZGI-6X-kLR" customClass="MapViewController" customModule="GMPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="civ-oY-v8v"/>
+                        <viewControllerLayoutGuide type="bottom" id="1oT-df-3nf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gRI-J5-5RU">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qF2-O5-L9O">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qF2-O5-L9O" secondAttribute="trailing" id="1Cz-gm-XTC"/>
+                            <constraint firstItem="qF2-O5-L9O" firstAttribute="top" secondItem="civ-oY-v8v" secondAttribute="bottom" id="Xa1-JE-9aH"/>
+                            <constraint firstItem="qF2-O5-L9O" firstAttribute="leading" secondItem="gRI-J5-5RU" secondAttribute="leading" id="bBf-5P-8AE"/>
+                            <constraint firstItem="1oT-df-3nf" firstAttribute="top" secondItem="qF2-O5-L9O" secondAttribute="bottom" id="vMv-vp-PRu"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="mapView" destination="qF2-O5-L9O" id="r1G-NL-HTP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="67T-Sf-OAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="190"/>
         </scene>
         <!--Photos-->
         <scene sceneID="JNn-3Y-TrR">

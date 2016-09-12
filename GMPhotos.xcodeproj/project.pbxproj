@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E66A5BAF1D803C97002CFA19 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5BAE1D803C97002CFA19 /* MapViewController.swift */; };
+		E66A5BD31D80607C002CFA19 /* PhotoPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5BD21D80607C002CFA19 /* PhotoPagerViewController.swift */; };
 		E676A49F1D78DF020059B593 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676A49D1D78DF020059B593 /* Photo.swift */; };
 		E676A4A21D78E4D90059B593 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676A4A01D78E4D90059B593 /* PhotoHelper.swift */; };
 		E676A4A31D78E4D90059B593 /* SavePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676A4A11D78E4D90059B593 /* SavePhotoViewController.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		E66A5BAE1D803C97002CFA19 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E66A5BD21D80607C002CFA19 /* PhotoPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPagerViewController.swift; sourceTree = "<group>"; };
 		E676A49D1D78DF020059B593 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E676A4A01D78E4D90059B593 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		E676A4A11D78E4D90059B593 /* SavePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePhotoViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				E6B971FD1D78C2720029FE3B /* whistler.jpg */,
 				E6B971E71D78C08F0029FE3B /* AppDelegate.swift */,
 				E6B971FF1D78C2C80029FE3B /* PhotoCollectionViewController.swift */,
+				E66A5BD21D80607C002CFA19 /* PhotoPagerViewController.swift */,
 				E6B971E91D78C08F0029FE3B /* PhotoViewController.swift */,
 				E66A5BAE1D803C97002CFA19 /* MapViewController.swift */,
 				E676A4A11D78E4D90059B593 /* SavePhotoViewController.swift */,
@@ -169,6 +172,7 @@
 				E66A5BAF1D803C97002CFA19 /* MapViewController.swift in Sources */,
 				E676A4A21D78E4D90059B593 /* PhotoHelper.swift in Sources */,
 				E6B971EA1D78C08F0029FE3B /* PhotoViewController.swift in Sources */,
+				E66A5BD31D80607C002CFA19 /* PhotoPagerViewController.swift in Sources */,
 				E6B971E81D78C08F0029FE3B /* AppDelegate.swift in Sources */,
 				E6B972001D78C2C80029FE3B /* PhotoCollectionViewController.swift in Sources */,
 			);

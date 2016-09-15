@@ -46,10 +46,11 @@ class PhotoHelper
 
         // Now we draw the underlying CGImage into a new context, applying the transform
         // calculated above.
+        let imageRef = image.CGImage!
         let ctx: CGContextRef = CGBitmapContextCreate(nil, Int(size.width), Int(size.height),
-                                                      CGImageGetBitsPerComponent(image.CGImage), 0,
-                                                      CGImageGetColorSpace(image.CGImage),
-                                                      CGImageGetBitmapInfo(image.CGImage).rawValue)!
+                                                      CGImageGetBitsPerComponent(imageRef), 0,
+                                                      CGImageGetColorSpace(imageRef)!,
+                                                      CGImageGetBitmapInfo(imageRef).rawValue)!
 
         CGContextConcatCTM(ctx, transform)
 
@@ -57,9 +58,9 @@ class PhotoHelper
             imageOrientation == UIImageOrientation.LeftMirrored ||
             imageOrientation == UIImageOrientation.Right ||
             imageOrientation == UIImageOrientation.RightMirrored ) {
-            CGContextDrawImage(ctx, CGRectMake(0, 0, size.height, size.width), image.CGImage)
+            CGContextDrawImage(ctx, CGRectMake(0, 0, size.height, size.width), imageRef)
         } else {
-            CGContextDrawImage(ctx, CGRectMake(0, 0, size.width, size.height), image.CGImage)
+            CGContextDrawImage(ctx, CGRectMake(0, 0, size.width, size.height), imageRef)
         }
         
         // And now we just create a new UIImage from the drawing context and return it
